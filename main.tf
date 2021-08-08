@@ -1,9 +1,15 @@
-resource "aci_rest" "fvTenant" {
-  dn         = "uni/tn-${var.name}"
-  class_name = "fvTenant"
+resource "aci_rest" "pkiKeyRing" {
+  dn         = "uni/userext/pkiext/keyring-${var.name}"
+  class_name = "pkiKeyRing"
   content = {
-    name      = var.name
-    nameAlias = var.alias
-    descr     = var.description
+    name  = var.name
+    descr = var.description
+    tp    = var.ca_certificate
+    cert  = var.certificate
+    key   = var.private_key
+  }
+
+  lifecycle {
+    ignore_changes = [content["cert"], content["key"]]
   }
 }
