@@ -12,7 +12,8 @@ Location in GUI:
 
 ```hcl
 module "aci_keyring" {
-  source = "netascode/keyring/aci"
+  source  = "netascode/keyring/aci"
+  version = ">= 0.0.1"
 
   name           = "KEYRING1"
   description    = "My Description"

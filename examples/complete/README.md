@@ -13,7 +13,8 @@ Note that this example will create resources. Resources can be destroyed with `t
 
 ```hcl
 module "aci_keyring" {
-  source = "netascode/keyring/aci"
+  source  = "netascode/keyring/aci"
+  version = ">= 0.0.1"
 
   name           = "KEYRING1"
   description    = "My Description"
