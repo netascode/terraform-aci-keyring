@@ -5,13 +5,13 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
 
-resource "aci_rest" "pkiTP" {
+resource "aci_rest_managed" "pkiTP" {
   dn         = "uni/userext/pkiext/tp-CA1"
   class_name = "pkiTP"
   content = {
@@ -48,7 +48,7 @@ module "main" {
 
   name           = "KEYRING1"
   description    = "My Description"
-  ca_certificate = aci_rest.pkiTP.content.name
+  ca_certificate = aci_rest_managed.pkiTP.content.name
   certificate    = <<-EOT
     -----BEGIN CERTIFICATE-----
     MIICyzCCAbMCCQCUc/SvuffglTANBgkqhkiG9w0BAQsFADAvMQswCQYDVQQGEwJE
@@ -99,7 +99,7 @@ module "main" {
   EOT
 }
 
-data "aci_rest" "pkiKeyRing" {
+data "aci_rest_managed" "pkiKeyRing" {
   dn = "uni/userext/pkiext/keyring-${module.main.name}"
 
   depends_on = [module.main]
@@ -110,19 +110,19 @@ resource "test_assertions" "pkiKeyRing" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.pkiKeyRing.content.name
+    got         = data.aci_rest_managed.pkiKeyRing.content.name
     want        = module.main.name
   }
 
   equal "descr" {
     description = "descr"
-    got         = data.aci_rest.pkiKeyRing.content.descr
+    got         = data.aci_rest_managed.pkiKeyRing.content.descr
     want        = "My Description"
   }
 
   equal "tp" {
     description = "tp"
-    got         = data.aci_rest.pkiKeyRing.content.tp
+    got         = data.aci_rest_managed.pkiKeyRing.content.tp
     want        = "CA1"
   }
 }

@@ -1,9 +1,9 @@
 output "dn" {
-  value       = aci_rest.pkiKeyRing.id
+  value       = aci_rest_managed.pkiKeyRing.id
   description = "Distinguished name of `pkiKeyRing` object."
 }
 
 output "name" {
-  value       = aci_rest.pkiKeyRing.content.name
+  value       = aci_rest_managed.pkiKeyRing.content.name
   description = "Keyring name."
 }

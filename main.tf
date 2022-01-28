@@ -1,4 +1,4 @@
-resource "aci_rest" "pkiKeyRing" {
+resource "aci_rest_managed" "pkiKeyRing" {
   dn         = "uni/userext/pkiext/keyring-${var.name}"
   class_name = "pkiKeyRing"
   content = {

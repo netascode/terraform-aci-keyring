@@ -14,7 +14,7 @@ Note that this example will create resources. Resources can be destroyed with `t
 ```hcl
 module "aci_keyring" {
   source  = "netascode/keyring/aci"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   name           = "KEYRING1"
   description    = "My Description"
@@ -68,6 +68,5 @@ module "aci_keyring" {
     -----END RSA PRIVATE KEY-----
   EOT
 }
-
 ```
 <!-- END_TF_DOCS -->
