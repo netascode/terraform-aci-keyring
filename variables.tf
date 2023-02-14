@@ -40,4 +40,5 @@ variable "private_key" {
   description = "Private key."
   type        = string
   default     = ""
+  sensitive   = true
 }
